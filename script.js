@@ -1,8 +1,6 @@
 console.log('it works');
 
 // When the user click hide form, the form is hidden
-//hideForm.addEventListener('click', ($event) => {
-    //if($event.target)
     //newCard.style.display = 'none';
    // hideForm.style.display = 'none';
 //});
@@ -21,10 +19,11 @@ const form = document.querySelector('form');
 const postTitle = document.querySelector('#postTitle');
 const submitButton = document.querySelector('.btn-primary');
 const postContent = document.querySelector('textarea');
-const postAuthor = document.querySelector('input');
+const postAuthor = document.createElement('input');
+const errorMessage = document.querySelector('#error-message');
 
 postContent.classList.add('post-content');
-postAuthor[1].classList.add('author');
+
 
 
 submitButton.addEventListener('click', ($event) => {
@@ -34,7 +33,7 @@ const myNewHtml = `
 <div class="card">
     <div class="card-body">
         <img src="https://picsum.photos/500/200">
-        <h5>${postTitle.value} by ${postAuthor.value}</h5>
+        <h5>${postTitle.value} by <p>${postAuthor.value}</p></h5>
         <p>${postContent.value}</p>
     </div>
 </div>
@@ -43,5 +42,13 @@ const myNewHtml = `
 cardForm.innerHTML += myNewHtml;
 
 form.reset();
+});
+
+postContent.addEventListener('input', ($event) => {
+    if($event.target.value.length < 20) {
+        errorMessage.style.display = 'block';
+    } else {
+        errorMessage.style.display = 'none';
+    }
 });
 
