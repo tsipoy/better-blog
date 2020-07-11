@@ -1,47 +1,37 @@
 console.log('it works');
 
-// When the user click hide form, the form is hidden
-    //newCard.style.display = 'none';
-   // hideForm.style.display = 'none';
-//});
+// Grabbing elements
 
-//addPost.addEventListener('click', ($event) => {
-    //if($event.target)
-    //newCard.style.display = 'block';
-    //hideForm.style.display = 'block';
-//});
-
-
-const hideForm = document.getElementsByClassName('.hidden');
-const newCard = document.getElementById('form-card');
-const cardForm = document.querySelector('#form-card');
-const form = document.querySelector('form');
+const cardForm = document.querySelector('#post-list');
+console.log(cardForm);
+const form = document.querySelector('#post-form');
 const postTitle = document.querySelector('#postTitle');
 const submitButton = document.querySelector('.btn-primary');
 const postContent = document.querySelector('textarea');
 const postAuthor = document.querySelector('[name="postAuthor"]');
 const errorMessage = document.querySelector('#error-message');
+const hideForm = document.getElementById('show-form');
+const newCard = document.getElementById('form-card');
 
 postContent.classList.add('post-content');
 
-
-
 submitButton.addEventListener('click', ($event) => {
     $event.preventDefault();
-
-const myNewHtml = `
-<div class="card">
-    <div class="card-body">
-        <img src="https://picsum.photos/500/200">
-        <h5>${postTitle.value} by ${postAuthor.value}</h5>
-        <p>${postContent.value}</p>
+    const myNewHtml = `
+    <div class="card">
+        <div class="card-body">
+            <img src="https://picsum.photos/500/200">
+            <h5>${postTitle.value} by ${postAuthor.value}</h5>
+            <p>${postContent.value}</p>
+        </div>
+        <div class="card-footer text-muted>
+            10/07/2020
+        </div>
     </div>
-</div>
-`;
+    `;
+    cardForm.innerHTML += myNewHtml;
 
-cardForm.innerHTML += myNewHtml;
-
-form.reset();
+    form.reset();
 });
 
 postContent.addEventListener('input', ($event) => {
@@ -52,3 +42,7 @@ postContent.addEventListener('input', ($event) => {
     }
 });
 
+hideForm.addEventListener('click', ($event) => {
+    if($event.target)
+    newCard.style.display = 'none';
+});
