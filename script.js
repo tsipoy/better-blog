@@ -19,7 +19,7 @@ const form = document.querySelector('form');
 const postTitle = document.querySelector('#postTitle');
 const submitButton = document.querySelector('.btn-primary');
 const postContent = document.querySelector('textarea');
-const postAuthor = document.createElement('input');
+const postAuthor = document.querySelector('[name="postAuthor"]');
 const errorMessage = document.querySelector('#error-message');
 
 postContent.classList.add('post-content');
@@ -33,7 +33,7 @@ const myNewHtml = `
 <div class="card">
     <div class="card-body">
         <img src="https://picsum.photos/500/200">
-        <h5>${postTitle.value} by <p>${postAuthor.value}</p></h5>
+        <h5>${postTitle.value} by ${postAuthor.value}</h5>
         <p>${postContent.value}</p>
     </div>
 </div>
