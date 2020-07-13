@@ -12,6 +12,7 @@ const errorMessage = document.querySelector('#error-message');
 const hideForm = document.querySelector('#show-form');
 const newCard = document.getElementById('form-card');
 const card = document.querySelector('.card');
+
 postContent.classList.add('post-content');
 
 submitButton.addEventListener('click', ($event) => {
@@ -19,18 +20,15 @@ submitButton.addEventListener('click', ($event) => {
     const date = new Date();
     const myNewHtml = `
     <div class="card">
-        <div class="card-body">
-            <img src="https://picsum.photos/500/200">
-            <h5>${postTitle.value} <small>by ${postAuthor.value}</small></h5>
-            <p>${postContent.value}</p>
-            <button type="button" class="btn btn-sm btn-light btn-delete">
-							Delete entry
-						</button>
-					</div>
-					<div class="card-footer text-muted">
-						${date}
-					</div>
-        </div>
+        <img class="card-img-top"src="https://picsum.photos/500/200" alt="beautiful random image"/>
+        <h5>${postTitle.value} <small>by ${postAuthor.value}</small></h5>
+        <p class="card-text">${postContent.value}</p>
+        <button type="button" class="btn btn-sm btn-light btn-delete">
+			Delete entry
+		</button>
+		<div class="card-footer text-muted">
+			${date.toLocaleDateString()}
+		</div>
     </div>
     `;
     cardForm.innerHTML += myNewHtml;
@@ -38,21 +36,29 @@ submitButton.addEventListener('click', ($event) => {
     form.reset();
 });
 
-postContent.addEventListener('input', ($event) => {
+const handleSubmit = (e) => {
+    e.preventDefault();
     if($event.target.value.split(" ").length < 20) {
         errorMessage.style.display = 'block';
     } else {
         errorMessage.style.display = 'none';
     }
-});
+};
 
-hideForm.addEventListener('click', ($event) => {
-    
-    if($event.target === 'true') {
-    newCard.classList.add('block');
+form.addEventListener('submit', handleSubmit);
+
+// Hide and show form 
+
+const toggleForm = () => {
+    if (newCard.classList.contains('hidden')) {
+        newCard.classList.remove('hidden');
+        hideForm.textContent = 'Hide form';
     } else {
         newCard.classList.add('hidden');
-        hideForm.textContent = 'show form'; 
-    
+        hideForm.textContent = 'Add a post';
+    }
 }
-});
+hideForm.addEventListener('click', toggleForm);
+
+// Delete button 
+
