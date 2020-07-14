@@ -31,21 +31,24 @@ submitButton.addEventListener('click', ($event) => {
 		</div>
     </div>
     `;
-    cardForm.innerHTML += myNewHtml;
+    // cardForm.innerHTML += myNewHtml;
+    cardForm.insertAdjacentHTML('afterbegin', myNewHtml);
 
     form.reset();
 });
 
-const handleSubmit = (e) => {
-    e.preventDefault();
+
+
+postContent.addEventListener('input', ($event) => {
     if($event.target.value.split(" ").length < 20) {
         errorMessage.style.display = 'block';
+        submitButton.setAttribute('disable', 'true');
     } else {
         errorMessage.style.display = 'none';
+        submitButton.setAttribute('disable', 'false');
     }
-};
+});
 
-form.addEventListener('submit', handleSubmit);
 
 // Hide and show form 
 
